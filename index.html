@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirección a Store</title>
+  <script>
+    window.onload = function() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Reemplazá estos enlaces con los de tu app
+      const androidURL = "https://play.google.com/store/apps/details?id=com.tuapp.ejemplo";
+      const iosURL = "https://apps.apple.com/app/id1234567890";
+
+      if (/android/i.test(userAgent)) {
+        window.location.href = androidURL;
+      } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = iosURL;
+      } else {
+        document.body.innerHTML = `
+          <h2>Dispositivo no reconocido</h2>
+          <p><a href="${androidURL}">Android</a> | <a href="${iosURL}">iOS</a></p>
+        `;
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Redirigiendo...</p>
+</body>
+</html>
