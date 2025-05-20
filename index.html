@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Redirección a Store</title>
   <script>
     window.onload = function() {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-      // Reemplazá estos enlaces con los de tu app
       const androidURL = "https://play.google.com/store/apps/details?id=com.norden.jp&pli=1";
       const iosURL = "https://apps.apple.com/ar/app/jp-clientes/id6742411262";
 
+      function redirect(url) {
+        // Redirigir después de mostrar el mensaje 1 segundo
+        setTimeout(() => {
+          window.location.href = url;
+        }, 1000);
+      }
+
       if (/android/i.test(userAgent)) {
-        window.location.href = androidURL;
+        document.body.innerHTML = "<p>Redirigiendo a Google Play...</p>";
+        redirect(androidURL);
       } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = iosURL;
+        document.body.innerHTML = "<p>Redirigiendo a App Store...</p>";
+        redirect(iosURL);
       } else {
         document.body.innerHTML = `
           <h2>Dispositivo no reconocido</h2>
@@ -25,6 +33,6 @@
   </script>
 </head>
 <body>
-  <p>Redirigiendo...</p>
+  <p>Detectando dispositivo...</p>
 </body>
 </html>
